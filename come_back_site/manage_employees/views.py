@@ -2,7 +2,6 @@ from .models import Employees, Tasks
 from django.shortcuts import render, redirect
 from .forms import EmployeeForm, TaskForm
 
-
 def list_employees(request):
     employees = Employees.objects.all()
     context = {
@@ -67,3 +66,12 @@ def delete_employee(request, id):
         return redirect('/')
 
     return render(request, 'manage_employees/employee_delete.html', {'employee': employee})
+
+
+def profile_employee(request, id):
+    employee_id = Employees.objects.get(id=id)
+
+    data = {
+        'employee': employee_id
+    }
+    return render(request, 'manage_employees/profile_employee.html', data)
