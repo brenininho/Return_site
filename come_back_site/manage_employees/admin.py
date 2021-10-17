@@ -4,12 +4,13 @@ from .models import Tasks, Employees
 
 class TasksInline(admin.TabularInline):
     model = Tasks
-    extra = 3
+    extra = 1
 
 
 class EmployeesAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,               {'fields': ['employee_name']}),
+        (None,               {'fields': ['email']}),
         ('Date information', {'fields': ['birthday_date'], 'classes': ['collapse']}),
     ]
     inlines = [TasksInline]

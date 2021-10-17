@@ -1,11 +1,16 @@
 from .models import Employees, Tasks
 from django.shortcuts import render, redirect
 from .forms import EmployeeForm
+import ipdb
+
 
 
 def list_employees(request):
     employees = Employees.objects.all()
-    return render(request, 'crud_employees.html', {'employees': employees})
+    context = {
+        'employees': employees
+    }
+    return render(request, 'manage_employees/crud_employees.html', context)
 
 
 def create_employees(request):
@@ -13,8 +18,8 @@ def create_employees(request):
 
     if form.is_valid():
         form.save()
-        return redirect('list_employees')
-    return render(request, 'create+update_employee.html', {'form': form})
+        return redirect('/')
+    return render(request, 'manage_employees/create_update_employee.html', {'form': form})
 
 
 def update_employee(request, id):
@@ -23,9 +28,9 @@ def update_employee(request, id):
 
     if form.is_valid():
         form.save()
-        return redirect('list_employees')
+        return redirect('/')
 
-    return render(request, 'create+update_employee.html', {'form': form, 'employee': employee})
+    return render(request, 'manage_employees/create_update_employee.html', {'form': form, 'employee': employee})
 
 
 def delete_employee(request, id):
@@ -33,6 +38,6 @@ def delete_employee(request, id):
 
     if request.method == 'POST':
         employee.delete()
-        return redirect('list_employees')
+        return redirect('/')
 
-    return render(request, 'employee_delete.html', {'employee': employee})
+    return render(request, 'manage_employees/employee_delete.html', {'employee': employee})

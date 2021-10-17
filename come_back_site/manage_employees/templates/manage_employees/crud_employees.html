@@ -10,13 +10,13 @@
 <body>
     <ul>
         {% for employee in employees %}
-            <a href="{% url 'update_employee' employee.id %}">
+            <a href="{% url 'manage_employees:update_employee' employee.id %}">
                 <li> {{ employee.employee_name }}</li>
             </a>
         {% endfor %}
     </ul>
 
-    <a href="{% url 'create_employees' %}">New employee</a>
+    <a href="{% url 'manage_employees:create_employees' %}">New employee</a>
 
 </body>
 </html>
