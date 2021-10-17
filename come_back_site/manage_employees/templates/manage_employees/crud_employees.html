@@ -6,17 +6,46 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Crud Employees</title>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
 </head>
 <body>
-    <ul>
-        {% for employee in employees %}
-            <a href="{% url 'manage_employees:profile_employee' employee.id %}">
+<table>
+  <tr>
+    <th>Nome do Funcionario</th>
+    <th>Email</th>
+    <th>Aniversario</th>
+  </tr>
+    {% for employee in employees %}
+  <tr>
+    <td><a href="{% url 'manage_employees:profile_employee' employee.id %}">
                 <li> {{ employee.employee_name }}</li>
-            </a>
-        {% endfor %}
-    </ul>
+            </a></td>
 
+    <td><a href="{% url 'manage_employees:profile_employee' employee.id %}">
+                <li> {{ employee.email }}</li>
+            </a></td>
+    <td><a href="{% url 'manage_employees:profile_employee' employee.id %}">
+                <li> {{ employee.birthday_date }}</li>
+            </a></td>
+      {% endfor %}
+  </tr>
     <a href="{% url 'manage_employees:create_employees' %}">New employee</a>
-
+</table>
 </body>
 </html>
