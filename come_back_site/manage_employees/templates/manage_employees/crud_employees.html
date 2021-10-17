@@ -8,6 +8,12 @@
     <title>Crud Employees</title>
 </head>
 <body>
+<nav>
+    <a href="{% url 'manage_employees:list_employees' %}">Home</a>
+    <a href="{% url 'manage_employees:create_employees' %}">New Employee</a>
+    <a href="{% url 'manage_employees:create_task' %}">New Task</a>
+    <a href="{% url 'manage_employees:list_tasks' %}">Tasks</a>
+</nav>
     <ul>
         {% for employee in employees %}
             <a href="{% url 'manage_employees:update_employee' employee.id %}">
@@ -16,7 +22,8 @@
         {% endfor %}
     </ul>
 
-    <a href="{% url 'manage_employees:create_employees' %}">New employee</a>
+
+
 
 </body>
 </html>

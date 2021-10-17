@@ -2,19 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Criar funcionário</title>
+    <title>Tarefas dos Funcionários</title>
 </head>
-<body><nav>
+<body>
+<nav>
     <a href="{% url 'manage_employees:list_employees' %}">Home</a>
     <a href="{% url 'manage_employees:create_employees' %}">New Employee</a>
     <a href="{% url 'manage_employees:create_task' %}">New Task</a>
     <a href="{% url 'manage_employees:list_tasks' %}">Tasks</a>
 </nav><br>
 
-<h1>Criar/atualizar Funcionário</h1>
+{% if task %}
+<h1>Atualizar Tarefa</h1>
+{% else %}
+<h1>Criar Tarefa</h1>
+{% endif%}
 
     <form method="POST">
         {% csrf_token %}
@@ -22,10 +24,8 @@
         <button type="submit">Salvar</button>
     </form>
 
-
     {% if employee %}
-        <a href="{% url 'manage_employees:delete_employee' employee.id %}">Delete</a>
+        <a href="{% url 'manage_employees:create_task' employee.id %}">Delete</a>
     {% endif %}
-
 </body>
 </html>
