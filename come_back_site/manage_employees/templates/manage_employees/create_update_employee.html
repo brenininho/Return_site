@@ -25,10 +25,5 @@
         <button type="submit">Salvar</button>
     </form>
 
-
-    {% if employee %}
-        <a href="{% url 'manage_employees:delete_employee' employee.id %}">Delete</a>
-    {% endif %}
-
 </body>
 </html>

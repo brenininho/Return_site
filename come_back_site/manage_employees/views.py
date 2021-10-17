@@ -32,7 +32,7 @@ def create_task(request):
 
     if form.is_valid():
         form.save()
-        return redirect('/')
+        return redirect('/tasks')
     return render(request, 'manage_employees/create_update_task.html', {'form': form})
 
 
@@ -53,7 +53,7 @@ def update_task(request, id):
 
     if form.is_valid():
         form.save()
-        return redirect('/')
+        return redirect('/tasks')
 
     return render(request, 'manage_employees/create_update_task.html', {'form': form, 'task': task})
 

@@ -36,11 +36,15 @@ tr:nth-child(even) {
 <table>
   <tr>
     <th>Nome do Funcionario</th>
+    <th>Deletar</th>
   </tr>
     {% for employee in employees %}
   <tr>
     <td><a href="{% url 'manage_employees:profile_employee' employee.id %}">
                 <li> {{ employee.employee_name }}</li>
+            </a></td>
+    <td><a href="{% url 'manage_employees:delete_employee' employee.id %}">
+                <li> Deletar </li>
             </a></td>
       {% endfor %}
   </tr>
