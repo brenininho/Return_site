@@ -13,8 +13,11 @@
     <a href="{% url 'manage_employees:create_task' %}">New Task</a>
     <a href="{% url 'manage_employees:list_tasks' %}">Tasks</a>
 </nav><br>
-
-<h1>Criar/atualizar Funcionário</h1>
+{% if employee %}
+<h1>Atualizar Funcionário</h1>
+{% else %}
+<h1>Criar Funcionário</h1>
+{% endif%}
 
     <form method="POST">
         {% csrf_token %}
