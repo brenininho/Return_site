@@ -10,7 +10,7 @@
 <body>
     <ul>
         {% for employee in employees %}
-            <a href="{% url 'manage_employees:update_employee' employee.id %}">
+            <a href="{% url 'manage_employees:profile_employee' employee.id %}">
                 <li> {{ employee.employee_name }}</li>
             </a>
         {% endfor %}
