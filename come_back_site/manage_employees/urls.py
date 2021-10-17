@@ -2,12 +2,14 @@ from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import list_employees, create_employees, update_employee, delete_employee
+
 
 app_name = 'manage_employees'
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
-    path('<int:pk>/', views.DetailView.as_view(), name='detail'),
-    path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
-    path('<int:question_id>/vote/', views.vote, name='vote'),
+    path('', list_employees, name='list_employees'),
+    path('new', create_employees, name='create_employees'),
+    path('update/<int:id>/', update_employee, name='update_employee'),
+    path('delete/<int:id>/', delete_employee, name='delete_employee'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

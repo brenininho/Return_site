@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deletar</title>
+</head>
+<body>
+<h1>Deletar funcionário</h1>
+<form method="post">
+    {% csrf_token %}
+    <h2>Tem certeza que quer deletar {{ employee.employee_name }} ?</h2>
+    <button type="submit">Confirm</button>
+</form>
+
+</body>
+</html>

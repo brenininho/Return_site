@@ -1,38 +1,38 @@
-from django.http import HttpResponseRedirect
-from .models import Question, Choice
-from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
-from django.views import generic
+from .models import Employees, Tasks
+from django.shortcuts import render, redirect
+from .forms import EmployeeForm
 
 
-class IndexView(generic.ListView):
-    template_name = 'manage_employees/index.html'
-    context_object_name = 'latest_question_list'
-
-    def get_queryset(self):
-        return Question.objects.order_by('-pub_date')[:5]
+def list_employees(request):
+    employees = Employees.objects.all()
+    return render(request, 'crud_employees.html', {'employees': employees})
 
 
-class DetailView(generic.DetailView):
-    model = Question
-    template_name = 'manage_employees/detail.html'
+def create_employees(request):
+    form = EmployeeForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('list_employees')
+    return render(request, 'create+update_employee.html', {'form': form})
 
 
-class ResultsView(generic.DetailView):
-    model = Question
-    template_name = 'manage_employees/results.html'
+def update_employee(request, id):
+    employee = Employees.objects.get(id=id)
+    form = EmployeeForm(request.POST or None, instance=employee)
+
+    if form.is_valid():
+        form.save()
+        return redirect('list_employees')
+
+    return render(request, 'create+update_employee.html', {'form': form, 'employee': employee})
 
 
-def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
-    except (KeyError, Choice.DoesNotExist):
-        return render(request, 'manage_employees/detail.html', {
-            'question': question,
-            'error_message': "You didn't select a choice.",
-        })
-    else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        return HttpResponseRedirect(reverse('manage_employees:results', args=(question.id,)))
+def delete_employee(request, id):
+    employee = Employees.objects.get(id=id)
+
+    if request.method == 'POST':
+        employee.delete()
+        return redirect('list_employees')
+
+    return render(request, 'employee_delete.html', {'employee': employee})
