@@ -3,6 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Tasks</title>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
 </head>
 <body>
     <nav>
@@ -11,19 +28,20 @@
         <a href="{% url 'manage_employees:create_task' %}">New Task</a>
         <a href="{% url 'manage_employees:list_tasks' %}">Tasks</a>
     </nav><br>
-
-<ul>
+<table>
+  <tr>
+    <th>Nome das tarefas</th>
+    <th>Nome dos funcionarios</th>
+  </tr>
     {% for task in tasks %}
-        <a>
-            <li>
-                {{ task.employees }}
-            </li>
-        </a>
-        <a href="{% url 'manage_employees:update_task' task.id %}">
+<tr>
+    <td><a href="{% url 'manage_employees:update_task' task.id %}">
             <li> {{ task.tasks }}</li>
-        </a>
-    {% endfor %}
-    </ul>
+    </a></td>
+      <td><a><li>{{ task.employees }}</li></a></td>
+      {% endfor %}
+</tr>
 
+</table>
 </body>
 </html>
